@@ -1,0 +1,20 @@
+* Micro ROS Zephyr Modules
+
+  This is Zephyr modularized Micro ROS.  It is, obviously, targeting
+  Zephyr RTOS.
+
+  This is still in pre-release preview only state.  It sort of builds
+  but nothing works.
+
+* How to build
+  #+begin_src shell
+    mkdir workspace
+    cd workspace
+    git clone https://github.com/yashi/micro-ros-zephyr-demo
+    pipenv shell
+    pip install west empy lark pyelftools
+    west init -l micro-ros-zephyr-demo
+    west update
+    pip install -r zephyr/scripts/requirements.txt
+    west build -b qemu_cortex_m3 micro-ros-zephyr-demo
+  #+end_src

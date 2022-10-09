@@ -1,0 +1,98 @@
+manifest:
+  defaults:
+    remote: micro-ros
+
+  remotes:
+    - name: ros2
+      url-base: https://github.com/ros2
+    - name: micro-ros
+      url-base: https://github.com/micro-ROS
+    - name: eprosima
+      url-base: https://github.com/eprosima
+    - name: yashi
+      url-base: https://github.com/yashi
+
+  projects:
+    - name: zephyr
+      url: https://github.com/zephyrproject-rtos/zephyr
+      revision: main
+      path: zephyr
+      west-commands: scripts/west-commands.yml
+      import:
+        name-allowlist:
+          - cmsis
+          - picolibc
+
+
+    - name: ros2_tracing
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/ros2_tracing
+
+    - name: rosidl
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/rosidl
+
+    - name: rcutils
+      remote: yashi #micro-ros
+      revision: zephyr-humble
+      path: modules/lib/rcutils
+
+    - name: rmw
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/rmw
+
+    - name: rcl_interfaces
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/rcl_interfaces
+
+    - name: unique_identifier_msgs
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/unique_identifier_msgs
+
+    - name: rcl
+      remote: yashi #micro-ros
+      revision: zephyr-humble
+      path: modules/lib/rcl
+
+    - name: rclc
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/rclc
+
+    - name: micro-cdr
+      remote: yashi #eprosima
+      revision: zephyr-humble #ros2
+      path: modules/lib/micro-cdr
+
+    - name: microxrcedds-client
+      remote: yashi #eprosima
+      revision: zephyr-humble #ros2
+      path: modules/lib/microxrcedds-client
+
+    - name: rosidl_typesupport_microxrcedds
+      remote: yashi #micro-ros
+      revision: zephyr-humble
+      path: modules/lib/rosidl_typesupport_microxrcedds
+
+    - name: rmw_microxrcedds
+      remote: yashi #micro-ros
+      revision: zephyr-humble
+      path: modules/lib/rmw_microxrcedds
+
+    - name: common_interfaces
+      remote: yashi #ros2
+      revision: zephyr-humble
+      path: modules/lib/common_interfaces
+
+    - name: rosidl_typesupport
+      remote: yashi #micro-ros
+      revision: zephyr-humble
+      path: modules/lib/rosidl_typesupport
+
+  self:
+    path: micro-ros-zephyr-demo
