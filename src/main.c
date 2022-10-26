@@ -16,13 +16,16 @@
 #include <rclc/executor.h>
 
 #include <rmw_microros/rmw_microros.h>
-//#include <microros_transports.h>
+
+#include "udp_transport.h"
 
 #define RCCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Aborting.\n",__LINE__,(int)temp_rc);for(;;){};}}
 #define RCSOFTCHECK(fn) { rcl_ret_t temp_rc = fn; if((temp_rc != RCL_RET_OK)){printf("Failed status on line %d: %d. Continuing.\n",__LINE__,(int)temp_rc);}}
 
 rcl_publisher_t publisher;
 std_msgs__msg__Int32 msg;
+
+static udp_transport_params_t udp_transport_params = {.ip = CONFIG_MICROROS_AGENT_IP, .port = CONFIG_MICROROS_AGENT_PORT};
 
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 {
@@ -35,16 +38,14 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
 void main(void)
 {
-#if 0
 	rmw_uros_set_custom_transport(
 		MICRO_ROS_FRAMING_REQUIRED,
-		(void *) DEVICE_DT_GET(DT_ALIAS(uros_serial_port)),
-		zephyr_transport_open,
-		zephyr_transport_close,
-		zephyr_transport_write,
-		zephyr_transport_read
+		(void *) &udp_transport_params,
+		udp_transport_open,
+		udp_transport_close,
+		udp_transport_write,
+		udp_transport_read
 	);
-#endif
 
 	rcl_allocator_t allocator = rcl_get_default_allocator();
 	rclc_support_t support;
