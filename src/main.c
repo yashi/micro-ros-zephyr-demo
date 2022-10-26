@@ -5,6 +5,11 @@
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
 
+#if IS_ENABLED(CONFIG_NET_DHCPV4)
+#include <zephyr/net/net_if.h>
+#include <zephyr/net/dhcpv4.h>
+#endif
+
 #include <time.h>
 #include <unistd.h>
 
@@ -38,6 +43,12 @@ void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 
 void main(void)
 {
+#if IS_ENABLED(CONFIG_NET_DHCPV4)
+	struct net_if *iface;
+	iface = net_if_get_default();
+	net_dhcpv4_start(iface);
+#endif
+
 	rmw_uros_set_custom_transport(
 		MICRO_ROS_FRAMING_REQUIRED,
 		(void *) &udp_transport_params,
