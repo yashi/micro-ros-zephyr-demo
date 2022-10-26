@@ -7,16 +7,17 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include <microros_transports.h>
-
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
 #include <netdb.h>
 
-bool zephyr_transport_open(struct uxrCustomTransport * transport){
-    zephyr_transport_params_t * params = (zephyr_transport_params_t*) transport->args;
+#include "udp_transport.h"
+
+
+bool udp_transport_open(struct uxrCustomTransport * transport){
+    udp_transport_params_t * params = (udp_transport_params_t*) transport->args;
 
     bool rv = false;
     params->poll_fd.fd = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -48,14 +49,14 @@ bool zephyr_transport_open(struct uxrCustomTransport * transport){
     return rv;
 }
 
-bool zephyr_transport_close(struct uxrCustomTransport * transport){
-    zephyr_transport_params_t * params = (zephyr_transport_params_t*) transport->args;
+bool udp_transport_close(struct uxrCustomTransport * transport){
+    udp_transport_params_t * params = (udp_transport_params_t*) transport->args;
 
     return (-1 == params->poll_fd.fd) ? true : (0 == close(params->poll_fd.fd));
 }
 
-size_t zephyr_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len, uint8_t * err){
-    zephyr_transport_params_t * params = (zephyr_transport_params_t*) transport->args;
+size_t udp_transport_write(struct uxrCustomTransport* transport, const uint8_t * buf, size_t len, uint8_t * err){
+    udp_transport_params_t * params = (udp_transport_params_t*) transport->args;
 
     size_t rv = 0;
     ssize_t bytes_sent = send(params->poll_fd.fd, (void*)buf, len, 0);
@@ -71,8 +72,8 @@ size_t zephyr_transport_write(struct uxrCustomTransport* transport, const uint8_
     return rv;
 }
 
-size_t zephyr_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int timeout, uint8_t* err){
-    zephyr_transport_params_t * params = (zephyr_transport_params_t*) transport->args;
+size_t udp_transport_read(struct uxrCustomTransport* transport, uint8_t* buf, size_t len, int timeout, uint8_t* err){
+    udp_transport_params_t * params = (udp_transport_params_t*) transport->args;
 
     size_t rv = 0;
     int poll_rv = poll(&params->poll_fd, 1, timeout);
