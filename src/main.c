@@ -93,7 +93,7 @@ void main(void)
 
 	while(1){
 		rclc_executor_spin_some(&executor, 100);
-		usleep(100000);
+		k_msleep(100);
 	}
 
 	// free resources
