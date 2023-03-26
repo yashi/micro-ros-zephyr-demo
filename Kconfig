@@ -1,15 +1,15 @@
 menu "Micro ROS Zephyr Demo"
 
-    config MICROROS_AGENT_IP
-        string "micro-ROS Agent IP"
-        help
-            micro-ROS Agent IP.
+config MICROROS_AGENT_IP
+	string "micro-ROS Agent IP"
+	help
+	  micro-ROS Agent IP.
 
-    config MICROROS_AGENT_PORT
-        string "micro-ROS Agent Port"
-        default "8888"
-        help
-            micro-ROS Agent port.
+config MICROROS_AGENT_PORT
+	string "micro-ROS Agent Port"
+	default "8888"
+	help
+	  micro-ROS Agent port.
 
 endmenu
 
