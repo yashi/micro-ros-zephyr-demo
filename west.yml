@@ -18,6 +18,3 @@ manifest:
       path: libros2-zephyr
       import:
         path-prefix: modules/ros2
-
-  self:
-    path: micro-ros-zephyr-demo
