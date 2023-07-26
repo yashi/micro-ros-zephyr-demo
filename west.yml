@@ -9,7 +9,6 @@ manifest:
         name-allowlist:
           - cmsis
           - hal_stm32
-          - picolibc
 
     - name: libros2-zephyr
       url: https://github.com/yashi/libros2-zephyr
