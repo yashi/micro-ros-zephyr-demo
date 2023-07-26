@@ -7,13 +7,14 @@
   but nothing works.
 
 * How to build
+  Make sure to setup your development environment.  Read the
+  "[[https://docs.zephyrproject.org/latest/develop/getting_started/index.html#getting-started-guide][Getting Started Guide]]" on the Zephyr document if you haven't.
+
   #+begin_src shell
     mkdir workspace
     cd workspace
-    git clone https://github.com/yashi/micro-ros-zephyr-demo
-    pipenv shell
     pip install west empy lark pyelftools
-    west init -l micro-ros-zephyr-demo
+    west init -m https://github.com/yashi/micro-ros-zephyr-demo
     west update
     pip install -r zephyr/scripts/requirements.txt
     west build -b qemu_cortex_m3 micro-ros-zephyr-demo
