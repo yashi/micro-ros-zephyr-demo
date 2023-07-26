@@ -1,7 +1,7 @@
 * Micro ROS Zephyr Modules
 
-  This is Zephyr modularized Micro ROS.  It is, obviously, targeting
-  Zephyr RTOS.
+  This is a demo for Zephyr modularized [[https://micro.ros.org/][micro-ROS]], [[https://github.com/yashi/libros2-zephyr][libros2-zephyr]].  It
+  is, obviously, targeting [[https://github.com/zephyrproject-rtos/zephyr][Zephyr RTOS]].
 
   This is still in pre-release preview only state.  It sort of builds
   but nothing works.
