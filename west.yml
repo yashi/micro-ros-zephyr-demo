@@ -4,7 +4,6 @@ manifest:
     - name: zephyr
       url: https://github.com/zephyrproject-rtos/zephyr
       revision: main
-      path: zephyr
       west-commands: scripts/west-commands.yml
       import:
         name-allowlist:
@@ -15,6 +14,5 @@ manifest:
     - name: libros2-zephyr
       url: https://github.com/yashi/libros2-zephyr
       revision: main
-      path: libros2-zephyr
       import:
         path-prefix: modules/ros2
